@@ -46,7 +46,7 @@
   top: 50px;
   color: white;
   font-weight: 100;
-  text-shadow: 2px 2px 5px #ee6e73, 0 0 1em blue, 0 0 1em black;
+  text-shadow: 2px 2px 5px #3c3a3a, 0 0 1em blue, 0 0 1em black;
 }
 
 .search-bar {
@@ -63,7 +63,7 @@
   opacity: 0.8;
   font-size: 1rem;
   outline: none;
-  box-shadow: 1px 1px 2px  rgba(255, 255, 255, 0.771);
+  box-shadow: 2px 2px 4px  rgba(32, 30, 30, 0.771);
 }
 
 #search-button {
