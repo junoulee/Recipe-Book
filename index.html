@@ -4,15 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AJAX Project</title>
+  <style> @import url('https://fonts.googleapis.com/css2?family=Swanky+and+Moo+Moo&display=swap'); </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Rock+Salt&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
+  <style> @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&family=Swanky+and+Moo+Moo&display=swap'); </style>
   <link rel="icon" href="images/favicon.ico">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
+  <header class="nav-bar">
+    <div class="container">
+      <div class="row">
+        <div class="column-full">
+          <h4 class="recipe-book"><a href="#" id="home-button">recipe book</a><span class="favorites-link"><a href="#" id="favorites-button">favorites</a></span></h4>
+        </div>
+      </div>
+    </div>
   </header>
-  <main>
+  <main class="container">
+    <div class="search-view" data-view="search-view">
+
+      <div class="row">
+
+        <div class="column-full">
+          <div class="search-box">
+            <div class="image">
+              <div class="image-text">
+                <h1 class="find-recipe">Find a Recipe</h1>
+                <div class="search-bar">
+                  <label for="site-search"></label>
+                  <input required type="search" id="site-search" placeholder="Search a recipe"/>
+                  <button id="search-button">GO</button>
+                </div>
+                <img class="main-image"
+     src="https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/healthy-eating-ingredients-1296x728-header.jpg?w=1155&h=1528"
+     alt="Photo URL Image">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
