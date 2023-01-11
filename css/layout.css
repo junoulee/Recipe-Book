@@ -22,6 +22,10 @@
   width: 100%;
 }
 
+.column-third {
+  flex-basis: calc(100% / 3);
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 1903px;
