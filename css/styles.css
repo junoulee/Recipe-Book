@@ -81,6 +81,55 @@
   box-shadow: 2px 2px 4px #f28f92;
 }
 
+.recipe-card {
+  list-style: none;
+  width: 450px;
+  border-style: solid;
+  border-color: #e4e2e2;
+  border-bottom: none;
+  display: flex;
+  justify-content: center;
+  background-color: #fef8f8;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 15px;
+  border-radius: 8px;
+  font-family: Roboto, sans-serif;
+  color: #565a5f;
+  height: 501px;
+}
+
+.recipe-name {
+  height: 64px;
+  padding-right: 10px;
+  width: 350px;
+}
+
+.calories-servings {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(243, 191, 191);
+  padding-bottom: 20px;
+  margin: -8px -24px -2px;
+  border-radius: 8px;
+  padding-top: 15px;
+  font-size: 1rem;
+  color: rgb(176, 128, 128);
+}
+
+.result-image {
+  width: 400px;
+  height: 300px;
+  border-radius: 5px;
+  margin-bottom: -10px;
+}
+
+.results-text {
+  font-family: "Rock Salt", cursive;
+  text-shadow: 2px 2px 5px #8a8787;
+}
+
 @media screen and (min-width: 768px) {
   #site-search {
     width: 450px;
@@ -90,5 +139,28 @@
     position: absolute;
     left: 550px;
     top: 250px;
+  }
+
+  .recipe-card {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 400px;
+  }
+
+  .result-image {
+    width: 350px;
+  }
+
+  .matching-results {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 954px) {
+  .matching-results {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 }

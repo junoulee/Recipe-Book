@@ -22,13 +22,9 @@
   width: 100%;
 }
 
-.column-third {
-  flex-basis: calc(100% / 3);
-}
-
 @media screen and (min-width: 768px) {
   .container {
-    max-width: 1903px;
+    max-width: 1600px;
   }
 
   .column-full,
@@ -38,5 +34,14 @@
 
   .column-half {
     width: 50%;
+  }
+
+  .column-third {
+    flex-basis: calc(100% / 3);
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
   }
 }
