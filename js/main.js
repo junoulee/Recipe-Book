@@ -27,3 +27,23 @@ function clickResults(event) {
 
 searchKeyword.addEventListener('search', getResults);
 searchButton.addEventListener('click', clickResults);
+
+// function renderResult(result) {
+//   var bullets = document.createElement('li');
+//   bullets.classList.add('recipe-card');
+
+//   var resultColumn = document.createElement('div');
+//   resultColumn.classList.add('column-third');
+//   bullets.appendChild(resultColumn);
+
+//   var recipePic = document.createElement('img');
+//   recipePic.classList.add('result-image');
+//   recipePic.setAttribute('src', result.hits.recipe.url);
+//   resultColumn.appendChild(recipePic);
+
+//   var recipeName = document.createElement('h2');
+//   recipeName.classList.add('recipe-name');
+//   recipeName.textContent = result.hits.label;
+//   resultColumn.appendChild(recipeName);
+
+// }
