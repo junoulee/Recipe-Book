@@ -83,30 +83,32 @@
 
 .recipe-card {
   list-style: none;
-  width: 400px;
+  width: 450px;
   border-style: solid;
   border-color: #e4e2e2;
   border-bottom: none;
   display: flex;
   justify-content: center;
   background-color: #fef8f8;
+  flex-wrap: wrap;
   margin-top: 20px;
   margin-bottom: 20px;
   padding-top: 15px;
   border-radius: 8px;
   font-family: Roboto, sans-serif;
   color: #565a5f;
+  height: 501px;
 }
 
-.result-image {
+.recipe-name {
+  height: 64px;
+  padding-right: 10px;
   width: 350px;
-  height: 300px;
-  border-radius: 5px;
-  margin-bottom: -10px;
 }
 
 .calories-servings {
-  text-align: center;
+  display: flex;
+  justify-content: center;
   background-color: rgb(243, 191, 191);
   padding-bottom: 20px;
   margin: -8px -24px -2px;
@@ -116,12 +118,11 @@
   color: rgb(176, 128, 128);
 }
 
-.left-padding {
-  padding-right: 35px;
-}
-
-.right-padding {
-  padding-left: 35px;
+.result-image {
+  width: 400px;
+  height: 300px;
+  border-radius: 5px;
+  margin-bottom: -10px;
 }
 
 .results-text {
@@ -144,6 +145,10 @@
     margin-left: 20px;
     margin-right: 20px;
     width: 400px;
+  }
+
+  .result-image {
+    width: 350px;
   }
 
   .matching-results {
