@@ -12,7 +12,7 @@ function getResults() {
   xhr.open('GET', 'https://api.edamam.com/search?q=' + searchValue + '&app_id=a1100983&app_key=e2ed55cd9fd501a90232f2085e84df8c');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    numberOfHits.textContent = xhr.response.hits.length + ' Matching results for ' + searchValue;
+    numberOfHits.textContent = xhr.response.hits.length + ' matching results for ' + searchValue;
     // console.log(xhr.status);
     // console.log(xhr.response);
     // console.log(xhr.response.hits[0].recipe.calories);
@@ -53,10 +53,16 @@ function renderResult(result) {
   recipePic.setAttribute('src', result.image);
   resultColumn.appendChild(recipePic);
 
+  // <a href="#" id="card-link" class="card-link"></a>
   var recipeName = document.createElement('h3');
   recipeName.classList.add('recipe-name');
   recipeName.textContent = result.label;
   resultColumn.appendChild(recipeName);
+
+  var cardLink = document.createElement('a');
+  cardLink.setAttribute('href', '#');
+  cardLink.setAttribute('id', 'card-link');
+  recipeName.append(cardLink);
 
   var source = document.createElement('h5');
   source.classList.add('source-text');
@@ -70,12 +76,20 @@ function renderResult(result) {
 
   return bullets;
 }
+
 function dataLoop(result) {
 
   for (var i = 0; i < result.length; i++) {
     var domTree = renderResult(result[i].recipe);
     matchingResults.appendChild(domTree);
   }
-
 }
 document.addEventListener('DOMContentLoaded', dataLoop);
+
+// function showModal(event) {
+//   // var resultsDisplayed = document.querySelectorAll('li');
+
+//   console.log(event.target.value);
+// }
+// var cardLink = document.querySelectorAll('.card-link');
+// cardLink.addEventListener('click', showModal);

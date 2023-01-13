@@ -31,7 +31,7 @@
 
 .main-image {
   width: 1600px;
-  height: 600px;
+  height: 500px;
 }
 
 .image-text {
@@ -100,10 +100,19 @@
   height: 501px;
 }
 
+#card-link {
+  display: block;
+  cursor: pointer;
+  width: 400px;
+  height: 500px;
+  margin-top: -350px;
+}
+
 .recipe-name {
   height: 64px;
   padding-right: 10px;
   width: 350px;
+  cursor: pointer;
 }
 
 .calories-servings {
@@ -123,11 +132,99 @@
   height: 300px;
   border-radius: 5px;
   margin-bottom: -10px;
+  cursor: pointer;
 }
 
 .results-text {
   font-family: "Rock Salt", cursive;
   text-shadow: 2px 2px 5px #8a8787;
+}
+
+#modal-div {
+  position: fixed;
+  top: 20px;
+  left: 65px;
+  border-style: solid;
+  border-color: #363636;
+  background-color: #363636;
+  border-radius: 8px;
+  max-width: 450px;
+  padding: 5px;
+  max-height: 650px;
+}
+
+.modal-title {
+  max-width: 400px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modal-image {
+  display: flex;
+  justify-content: center;
+  width: 400px;
+  height: 200px;
+  border-radius: 15px;
+  margin-top: 7px;
+  padding: 8px 5px 0;
+}
+
+#x-button-left {
+  color: white;
+  font-size: 1rem;
+  float: right;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+.modal-details {
+  font-family: "rock salt", cursive;
+  color: white;
+  font-weight: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+}
+
+.recipe-details {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 8px;
+}
+
+#go-to-site {
+  font-family: Roboto, sans-serif;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  border-style: solid;
+  border-width: 10px;
+  border-radius: 5px;
+  background-color: #ee6e73;
+  border-color: #ee6e73;
+  letter-spacing: 1.5px;
+}
+
+.results {
+  position: relative;
+}
+
+.overlay {
+  position: fixed;
+  background:
+    linear-gradient(
+      rgba(33, 32, 32, 0.8),
+      rgb(33, 32, 32, 0.8)
+    );
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#x-button-right {
+  display: none;
 }
 
 @media screen and (min-width: 768px) {
@@ -154,6 +251,48 @@
   .matching-results {
     display: flex;
     justify-content: center;
+  }
+
+  #modal-div {
+    display: flex;
+    flex-wrap: wrap;
+    position: fixed;
+    top: 20px;
+    left: 65px;
+    max-width: 1000px;
+    height: 600px;
+    padding: 5px;
+  }
+
+  .modal-details {
+    width: 440px;
+  }
+
+  .modal-image {
+    display: flex;
+    justify-content: flex-start;
+    width: 400px;
+    height: 560px;
+  }
+
+  #x-button-left {
+    display: none;
+  }
+
+  #x-button-right {
+    display: block;
+    color: white;
+    float: right;
+    cursor: pointer;
+  }
+
+  .recipe-details {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  #go-to-site {
+    margin-top: 400px;
   }
 }
 
