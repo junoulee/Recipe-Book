@@ -2,6 +2,7 @@ var matchingResults = document.querySelector('.matching-results');
 var searchKeyword = document.querySelector('#site-search');
 var searchButton = document.querySelector('#search-button');
 var numberOfHits = document.querySelector('.results-text');
+var showModal = document.querySelector('.hidden');
 
 function getResults() {
   var searchValue = searchKeyword.value;
@@ -17,6 +18,7 @@ function getResults() {
     // console.log(xhr.response);
     // console.log(xhr.response.hits[0].recipe.calories);
     dataLoop(xhr.response.hits);
+    dataStore(xhr.response.hits);
 
   });
 
@@ -25,6 +27,8 @@ function getResults() {
   for (var i = 0; i < resultsDisplayed.length; i++) {
     if (resultsDisplayed) {
       resultsDisplayed[i].remove();
+      data.matchingResults = [];
+      data.resultId = 1;
     }
   }
 
@@ -62,17 +66,43 @@ function renderResult(result) {
   var cardLink = document.createElement('a');
   cardLink.setAttribute('href', '#');
   cardLink.setAttribute('id', 'card-link');
+  cardLink.setAttribute('resultId', data.resultId);
   recipeName.append(cardLink);
+
+  document.querySelectorAll('#card-link');
+  cardLink.addEventListener('click', modalPopUp);
 
   var source = document.createElement('h5');
   source.classList.add('source-text');
   source.textContent = 'Source: ' + result.source;
   resultColumn.appendChild(source);
 
-  var fineDetails = document.createElement('h5');
-  fineDetails.classList.add('calories-servings');
-  fineDetails.textContent = Math.trunc(result.calories) + ' Calories ' + ' | ' + result.yield + ' Servings';
-  resultColumn.appendChild(fineDetails);
+  var bottomRow = document.createElement('div');
+  bottomRow.classList.add('row-bottom');
+
+  var leftColumn = document.createElement('div');
+  leftColumn.classList.add('column-half');
+
+  var leftDetails = document.createElement('h5');
+  leftDetails.classList.add('calories-servings-left');
+  leftDetails.textContent = Math.trunc(result.calories) + ' Calories ';
+  leftColumn.appendChild(leftDetails);
+
+  var rightColumn = document.createElement('div');
+  rightColumn.classList.add('column-half');
+
+  var rightDetails = document.createElement('h5');
+  rightDetails.classList.add('calories-servings-right');
+  rightDetails.textContent = result.yield + ' Servings';
+  rightColumn.appendChild(rightDetails);
+
+  bottomRow.appendChild(leftColumn);
+  bottomRow.appendChild(rightColumn);
+  resultColumn.appendChild(bottomRow);
+  // var fineDetails = document.createElement('h5');
+  // fineDetails.classList.add('calories-servings');
+  // fineDetails.textContent = Math.trunc(result.calories) + ' Calories ' + ' | ' + result.yield + ' Servings';
+  // resultColumn.appendChild(fineDetails);
 
   return bullets;
 }
@@ -84,12 +114,112 @@ function dataLoop(result) {
     matchingResults.appendChild(domTree);
   }
 }
-document.addEventListener('DOMContentLoaded', dataLoop);
 
-// function showModal(event) {
-//   // var resultsDisplayed = document.querySelectorAll('li');
+function dataStore(result) {
 
-//   console.log(event.target.value);
-// }
-// var cardLink = document.querySelectorAll('.card-link');
-// cardLink.addEventListener('click', showModal);
+  for (var i = 0; i < result.length; i++) {
+    var resultValues = { name: result[i].recipe.label, diet: result[i].recipe.dietLabels, cuisine: result[i].recipe.cuisineType, mealType: result[i].recipe.mealType, dishType: result[i].recipe.dishType, calories: Math.trunc(result[i].recipe.calories), serving: result[i].recipe.yield, source: result[i].recipe.source };
+    data.matchingResults.push(resultValues);
+    resultValues.resultId = data.resultId;
+    data.resultId++;
+  }
+  // console.log(data.matchingResults);
+}
+
+function renderModal(result) {
+
+  var modalDiv = document.createElement('div');
+  modalDiv.classList.add('modal-div');
+  modalDiv.setAttribute('id', 'modal-div');
+
+  var columnHalfOne = document.createElement('div');
+  columnHalfOne.classList.add('column-half');
+  modalDiv.appendChild(columnHalfOne);
+
+  var xButton = document.createElement('i');
+  xButton.classList.add('fa-solid');
+  xButton.classList.add('fa-x');
+  xButton.setAttribute('id', 'x-button-left');
+  columnHalfOne.appendChild(xButton);
+
+  var modalImage = document.createElement('img');
+  modalImage.classList.add('modal-image');
+  modalImage.setAttribute('src', result.image);
+  // if this doesn't work - get it from data array
+  columnHalfOne.appendChild(modalImage);
+
+  var columnHalfTwo = document.createElement('div');
+  columnHalfTwo.classList.add('column-half');
+  modalDiv.appendChild(columnHalfTwo);
+
+  var xButtonRight = document.createElement('i');
+  xButtonRight.classList.add('fa-solid');
+  xButtonRight.classList.add('fa-x');
+  xButtonRight.setAttribute('id', 'x-button-right');
+  columnHalfTwo.appendChild(xButtonRight);
+
+  var modalDetails = document.createElement('div');
+  modalDetails.classList.add('modal-details');
+  columnHalfTwo.appendChild(modalDetails);
+
+  var modalTitle = document.createElement('h3');
+  modalTitle.classList.add('modal-title');
+  modalTitle.textContent = result.label;
+  modalDetails.appendChild(modalTitle);
+
+  var diet = document.createElement('h5');
+  diet.classList.add('recipe-details');
+  diet.textContent = result.dietLabels;
+  modalDetails.appendChild(diet);
+
+  var cuisine = document.createElement('h5');
+  cuisine.classList.add('recipe-details');
+  cuisine.textContent = result.cuisineType;
+  modalDetails.appendChild(cuisine);
+
+  var meal = document.createElement('h5');
+  meal.classList.add('recipe-details');
+  meal.textContent = result.mealType;
+  modalDetails.appendChild(meal);
+
+  var dish = document.createElement('h5');
+  dish.classList.add('recipe-details');
+  dish.textContent = result.dishType;
+  modalDetails.appendChild(dish);
+
+  var calories = document.createElement('h5');
+  calories.classList.add('recipe-details');
+  calories.textContent = Math.trunc(result.calories);
+  modalDetails.appendChild(calories);
+
+  var serving = document.createElement('h5');
+  serving.classList.add('recipe-details');
+  serving.textContent = result.yield;
+  modalDetails.appendChild(serving);
+
+  var source = document.createElement('h5');
+  source.classList.add('recipe-details');
+  source.textContent = result.source;
+  modalDetails.appendChild(source);
+
+  return modalDiv;
+}
+
+function modalPopUp(event) {
+  if (event.target.matches('#card-link') === true) {
+    for (var i = 0; i < data.matchingResults.length; i++) {
+      var targetId = Number(event.target.getAttribute('resultid'));
+      if (targetId === data.matchingResults[i].resultId) {
+        var modalDom = renderModal(data.matchingResults[i]);
+        showModal.appendChild(modalDom);
+        showModal.className = 'modal';
+      }
+    }
+  }
+
+}
+
+// DOM tree results need a result ID CHECK
+// matching result array results need a result ID CHECK
+// function datastore needs to store results in the matching result array CHECK
+// matching result array needs to clear out after a new search CHECK

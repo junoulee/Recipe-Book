@@ -104,7 +104,7 @@
   display: block;
   cursor: pointer;
   width: 400px;
-  height: 500px;
+  height: 400px;
   margin-top: -350px;
 }
 
@@ -115,8 +115,41 @@
   cursor: pointer;
 }
 
-.calories-servings {
+.calories-servings-left {
+  text-align: center;
+  background-color: rgb(243, 191, 191);
+  padding-bottom: 20px;
+  padding-top: 15px;
+  font-size: 1rem;
+  color: rgb(176, 128, 128);
+  margin-top: -8px;
+  margin-bottom: -8px;
+  margin-left: -25px;
+  margin-right: -5px;
+  border-radius: 0 8px;
+}
+
+.calories-servings-right {
+  text-align: center;
+  background-color: rgb(243, 191, 191);
+  padding-bottom: 20px;
+  padding-top: 15px;
+  font-size: 1rem;
+  color: rgb(176, 128, 128);
+  margin-top: -8px;
+  margin-bottom: -8px;
+  margin-right: -25px;
+  margin-left: -5px;
+  border-radius: 8px 0;
+}
+
+.row-bottom {
+  max-width: 450px;
   display: flex;
+  flex-wrap: nowrap;
+}
+
+/* .calories-servings {
   justify-content: center;
   background-color: rgb(243, 191, 191);
   padding-bottom: 20px;
@@ -125,14 +158,13 @@
   padding-top: 15px;
   font-size: 1rem;
   color: rgb(176, 128, 128);
-}
+} */
 
 .result-image {
   width: 400px;
   height: 300px;
   border-radius: 5px;
   margin-bottom: -10px;
-  cursor: pointer;
 }
 
 .results-text {
@@ -293,6 +325,20 @@
 
   #go-to-site {
     margin-top: 400px;
+  }
+
+  .calories-servings-left {
+    margin-left: -37px;
+    margin-right: -20px;
+  }
+
+  .calories-servings-right {
+    margin-right: -37px;
+    margin-left: -20px;
+  }
+
+  #card-link {
+    width: 350px;
   }
 }
 
