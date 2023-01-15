@@ -5,7 +5,6 @@
   font-size: 3.5rem;
   margin-top: -75px;
   height: 160px;
-  margin-bottom: 25px;
   justify-content: left;
 }
 
@@ -30,7 +29,7 @@
 }
 
 .main-image {
-  width: 1600px;
+  width: 1536px;
   height: 500px;
 }
 
@@ -42,7 +41,7 @@
   position: absolute;
   font-family: "Rock Salt", cursive;
   font-size: 4rem;
-  left: 550px;
+  left: 500px;
   top: 50px;
   color: white;
   font-weight: 100;
@@ -51,7 +50,7 @@
 
 .search-bar {
   position: absolute;
-  left: 600px;
+  left: 560px;
   top: 250px;
 }
 
@@ -98,6 +97,17 @@
   font-family: Roboto, sans-serif;
   color: #565a5f;
   height: 501px;
+}
+
+.recipe-card:hover {
+  background-color: #ffeaa7;
+  border-style: none;
+  border-bottom: solid;
+  border-bottom-color: rgb(243, 191, 191);
+}
+
+.recipe-card:active {
+  box-shadow: 2px 2px 5px #fc894d;
 }
 
 #card-link {
@@ -165,6 +175,7 @@
   height: 300px;
   border-radius: 5px;
   margin-bottom: -10px;
+  cursor: pointer;
 }
 
 .results-text {
@@ -275,7 +286,7 @@
 
   .search-bar {
     position: absolute;
-    left: 550px;
+    left: 490px;
     top: 250px;
   }
 
@@ -292,14 +303,15 @@
   .matching-results {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   #modal-div {
     display: flex;
     flex-wrap: wrap;
     position: fixed;
-    top: 20px;
-    left: 65px;
+    top: 70px;
+    left: 58px;
     max-width: 1000px;
     height: 600px;
     padding: 5px;

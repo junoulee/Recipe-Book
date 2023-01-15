@@ -14,7 +14,7 @@ function getResults() {
   xhr.open('GET', 'https://api.edamam.com/search?q=' + searchValue + '&app_id=a1100983&app_key=e2ed55cd9fd501a90232f2085e84df8c');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    numberOfHits.textContent = xhr.response.hits.length + ' matching results for ' + searchValue;
+    numberOfHits.textContent = xhr.response.hits.length + ' matching results for ' + '"' + searchValue + '"';
     // console.log(xhr.status);
     // console.log(xhr.response);
     // console.log(xhr.response.hits[0].recipe.calories);
@@ -56,12 +56,22 @@ function renderResult(result) {
   var recipePic = document.createElement('img');
   recipePic.classList.add('result-image');
   recipePic.setAttribute('src', result.image);
+  recipePic.setAttribute('href', '#');
+  recipePic.setAttribute('id', 'pic-link');
+  recipePic.setAttribute('resultId', data.resultId);
   resultColumn.appendChild(recipePic);
+  document.querySelectorAll('#card-link');
+  recipePic.addEventListener('click', modalPopUp);
 
   var recipeName = document.createElement('h3');
   recipeName.classList.add('recipe-name');
+  recipeName.setAttribute('href', '#');
+  recipeName.setAttribute('id', 'name-link');
+  recipeName.setAttribute('resultId', data.resultId);
   recipeName.textContent = result.label;
   resultColumn.appendChild(recipeName);
+  document.querySelectorAll('#name-link');
+  recipeName.addEventListener('click', modalPopUp);
 
   var cardLink = document.createElement('a');
   cardLink.setAttribute('href', '#');
@@ -114,12 +124,9 @@ function dataLoop(result) {
 function dataStore(result) {
 
   for (var i = 0; i < result.length; i++) {
-
     var resultValues = { resultId: i + 1, name: result[i].recipe.label, diet: result[i].recipe.dietLabels, cuisine: result[i].recipe.cuisineType, mealType: result[i].recipe.mealType, dishType: result[i].recipe.dishType, calories: Math.trunc(result[i].recipe.calories), serving: result[i].recipe.yield, source: result[i].recipe.source, image: result[i].recipe.image, url: result[i].recipe.url };
     data.matchingResults.push(resultValues);
-
   }
-
 }
 
 function renderModal(result) {
@@ -192,7 +199,7 @@ function renderModal(result) {
 
   var dish = document.createElement('h5');
   dish.classList.add('recipe-details');
-  dish.textContent = 'Dish type: ' + result.dishType + ' ';
+  dish.textContent = 'Dish type: ' + result.dishType;
 
   modalDetails.appendChild(dish);
 
@@ -222,7 +229,7 @@ function renderModal(result) {
 }
 
 function modalPopUp(event) {
-  if (event.target.matches('#card-link') === true) {
+  if (event.target.matches('#card-link') === true || event.target.matches('#pic-link') === true || event.target.matches('#name-link') === true) {
     for (var i = 0; i < data.matchingResults.length; i++) {
       var targetId = Number(event.target.getAttribute('resultid'));
       if (targetId === data.matchingResults[i].resultId) {
@@ -233,7 +240,6 @@ function modalPopUp(event) {
       }
     }
   }
-
 }
 
 // DOM tree results need a result ID CHECK
