@@ -3,6 +3,7 @@ var searchKeyword = document.querySelector('#site-search');
 var searchButton = document.querySelector('#search-button');
 var numberOfHits = document.querySelector('.results-text');
 var showModal = document.querySelector('.hidden');
+var overlay = document.querySelector('.overlay-hidden');
 
 function getResults() {
   var searchValue = searchKeyword.value;
@@ -17,9 +18,9 @@ function getResults() {
     // console.log(xhr.status);
     // console.log(xhr.response);
     // console.log(xhr.response.hits[0].recipe.calories);
+
     dataLoop(xhr.response.hits);
     dataStore(xhr.response.hits);
-
   });
 
   xhr.send();
@@ -57,7 +58,6 @@ function renderResult(result) {
   recipePic.setAttribute('src', result.image);
   resultColumn.appendChild(recipePic);
 
-  // <a href="#" id="card-link" class="card-link"></a>
   var recipeName = document.createElement('h3');
   recipeName.classList.add('recipe-name');
   recipeName.textContent = result.label;
@@ -68,7 +68,7 @@ function renderResult(result) {
   cardLink.setAttribute('id', 'card-link');
   cardLink.setAttribute('resultId', data.resultId);
   recipeName.append(cardLink);
-
+  data.resultId++;
   document.querySelectorAll('#card-link');
   cardLink.addEventListener('click', modalPopUp);
 
@@ -99,10 +99,6 @@ function renderResult(result) {
   bottomRow.appendChild(leftColumn);
   bottomRow.appendChild(rightColumn);
   resultColumn.appendChild(bottomRow);
-  // var fineDetails = document.createElement('h5');
-  // fineDetails.classList.add('calories-servings');
-  // fineDetails.textContent = Math.trunc(result.calories) + ' Calories ' + ' | ' + result.yield + ' Servings';
-  // resultColumn.appendChild(fineDetails);
 
   return bullets;
 }
@@ -118,12 +114,12 @@ function dataLoop(result) {
 function dataStore(result) {
 
   for (var i = 0; i < result.length; i++) {
-    var resultValues = { name: result[i].recipe.label, diet: result[i].recipe.dietLabels, cuisine: result[i].recipe.cuisineType, mealType: result[i].recipe.mealType, dishType: result[i].recipe.dishType, calories: Math.trunc(result[i].recipe.calories), serving: result[i].recipe.yield, source: result[i].recipe.source };
+
+    var resultValues = { resultId: i + 1, name: result[i].recipe.label, diet: result[i].recipe.dietLabels, cuisine: result[i].recipe.cuisineType, mealType: result[i].recipe.mealType, dishType: result[i].recipe.dishType, calories: Math.trunc(result[i].recipe.calories), serving: result[i].recipe.yield, source: result[i].recipe.source, image: result[i].recipe.image, url: result[i].recipe.url };
     data.matchingResults.push(resultValues);
-    resultValues.resultId = data.resultId;
-    data.resultId++;
+
   }
-  // console.log(data.matchingResults);
+
 }
 
 function renderModal(result) {
@@ -158,49 +154,69 @@ function renderModal(result) {
   xButtonRight.setAttribute('id', 'x-button-right');
   columnHalfTwo.appendChild(xButtonRight);
 
+  xButton.addEventListener('click', modalClose);
+  xButtonRight.addEventListener('click', modalClose);
+
   var modalDetails = document.createElement('div');
   modalDetails.classList.add('modal-details');
   columnHalfTwo.appendChild(modalDetails);
 
   var modalTitle = document.createElement('h3');
   modalTitle.classList.add('modal-title');
-  modalTitle.textContent = result.label;
+  modalTitle.textContent = result.name;
   modalDetails.appendChild(modalTitle);
 
   var diet = document.createElement('h5');
   diet.classList.add('recipe-details');
-  diet.textContent = result.dietLabels;
+  diet.textContent = 'Diet type: ' + result.diet;
+  if (result.diet.length === 0) {
+    diet.textContent = 'Diet type: Unavailable';
+  }
   modalDetails.appendChild(diet);
 
   var cuisine = document.createElement('h5');
   cuisine.classList.add('recipe-details');
-  cuisine.textContent = result.cuisineType;
+  cuisine.textContent = 'Cuisine type: ' + result.cuisine;
+  if (result.cuisine.length === 0) {
+    cuisine.textContent = 'Cuisine type: Unavailable';
+  }
   modalDetails.appendChild(cuisine);
 
   var meal = document.createElement('h5');
   meal.classList.add('recipe-details');
-  meal.textContent = result.mealType;
+  meal.textContent = 'Meal type: ' + result.mealType;
+  if (result.mealType.length === 0) {
+    meal.textContent = 'Meal type: Unavailable';
+  }
   modalDetails.appendChild(meal);
 
   var dish = document.createElement('h5');
   dish.classList.add('recipe-details');
-  dish.textContent = result.dishType;
+  dish.textContent = 'Dish type: ' + result.dishType + ' ';
+
   modalDetails.appendChild(dish);
 
   var calories = document.createElement('h5');
   calories.classList.add('recipe-details');
-  calories.textContent = Math.trunc(result.calories);
+  calories.textContent = 'Calories: ' + Math.trunc(result.calories);
   modalDetails.appendChild(calories);
 
   var serving = document.createElement('h5');
   serving.classList.add('recipe-details');
-  serving.textContent = result.yield;
+  serving.textContent = 'Serving: ' + result.serving;
   modalDetails.appendChild(serving);
 
   var source = document.createElement('h5');
   source.classList.add('recipe-details');
-  source.textContent = result.source;
+  source.textContent = 'Recipe source: ' + result.source;
   modalDetails.appendChild(source);
+
+  var button = document.createElement('a');
+  button.setAttribute('href', result.url);
+  button.setAttribute('id', 'go-to-site');
+  button.setAttribute('target', '_blank');
+  button.textContent = 'VISIT RECIPE PAGE';
+  modalDetails.appendChild(button);
 
   return modalDiv;
 }
@@ -213,6 +229,7 @@ function modalPopUp(event) {
         var modalDom = renderModal(data.matchingResults[i]);
         showModal.appendChild(modalDom);
         showModal.className = 'modal';
+        overlay.className = 'overlay';
       }
     }
   }
@@ -223,3 +240,10 @@ function modalPopUp(event) {
 // matching result array results need a result ID CHECK
 // function datastore needs to store results in the matching result array CHECK
 // matching result array needs to clear out after a new search CHECK
+
+function modalClose(event) {
+  if (event.target.matches('#x-button-left') === true || (event.target.matches('#x-button-right') === true)) {
+    showModal.className = 'hidden';
+    overlay.className = 'overlay-hidden';
+  }
+}
