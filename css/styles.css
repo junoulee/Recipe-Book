@@ -131,12 +131,14 @@
   padding-bottom: 20px;
   padding-top: 15px;
   font-size: 1rem;
-  color: rgb(176, 128, 128);
+  color: #565a5f;
   margin-top: -8px;
   margin-bottom: -8px;
   margin-left: -25px;
   margin-right: -5px;
   border-radius: 0 8px;
+  border-right: solid;
+  border-color: #fef8f8;
 }
 
 .calories-servings-right {
@@ -145,12 +147,14 @@
   padding-bottom: 20px;
   padding-top: 15px;
   font-size: 1rem;
-  color: rgb(176, 128, 128);
+  color: #565a5f;
   margin-top: -8px;
   margin-bottom: -8px;
   margin-right: -25px;
   margin-left: -5px;
-  border-radius: 8px 0;
+  border-radius: 0 0 8px;
+  border-left: solid;
+  border-color: #fef8f8;
 }
 
 .row-bottom {
@@ -237,6 +241,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   padding-left: 8px;
+  letter-spacing: 1.5px;
 }
 
 #go-to-site {

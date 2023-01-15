@@ -56,7 +56,6 @@ function renderResult(result) {
   var recipePic = document.createElement('img');
   recipePic.classList.add('result-image');
   recipePic.setAttribute('src', result.image);
-  recipePic.setAttribute('href', '#');
   recipePic.setAttribute('id', 'pic-link');
   recipePic.setAttribute('resultId', data.resultId);
   resultColumn.appendChild(recipePic);
@@ -65,7 +64,6 @@ function renderResult(result) {
 
   var recipeName = document.createElement('h3');
   recipeName.classList.add('recipe-name');
-  recipeName.setAttribute('href', '#');
   recipeName.setAttribute('id', 'name-link');
   recipeName.setAttribute('resultId', data.resultId);
   recipeName.textContent = result.label;
@@ -74,7 +72,6 @@ function renderResult(result) {
   recipeName.addEventListener('click', modalPopUp);
 
   var cardLink = document.createElement('a');
-  cardLink.setAttribute('href', '#');
   cardLink.setAttribute('id', 'card-link');
   cardLink.setAttribute('resultId', data.resultId);
   recipeName.append(cardLink);
