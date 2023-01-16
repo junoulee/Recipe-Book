@@ -222,6 +222,27 @@ function renderModal(result) {
   button.textContent = 'VISIT RECIPE PAGE';
   modalDetails.appendChild(button);
 
+  // <i class="fa-regular fa-heart" id="heart"></i>
+  // <a class="favorites">ADD TO FAVORITES</a>
+
+  var heart = document.createElement('i');
+  heart.setAttribute('id', 'heart');
+  heart.classList.add('fa-solid');
+  heart.classList.add('fa-heart');
+  // heart.setAttribute('resultId', data.resultId);
+  modalDetails.appendChild(heart);
+
+  // document.querySelectorAll('#heart');
+  heart.addEventListener('click', addToFavorites);
+
+  var favorites = document.createElement('a');
+  favorites.classList.add('favorites');
+  // favorites.setAttribute('resultId', data.resultId);
+  favorites.textContent = 'ADD TO FAVORITES';
+  modalDetails.appendChild(favorites);
+  // document.querySelectorAll('.favorites');
+  favorites.addEventListener('click', addToFavorites);
+
   return modalDiv;
 }
 
@@ -248,5 +269,20 @@ function modalClose(event) {
   if (event.target.matches('#x-button-left') === true || (event.target.matches('#x-button-right') === true)) {
     showModal.className = 'hidden';
     overlay.className = 'overlay-hidden';
+  }
+}
+
+function addToFavorites(event) {
+
+  if (event.target.matches('#heart') === true || event.target.matches('.favorites') === true) {
+    for (var i = 0; i < data.matchingResults.length; i++) {
+      var button = document.querySelector('#go-to-site');
+      if (data.matchingResults[i].url === button.getAttribute('href')) {
+
+        data.favorites.push(data.matchingResults[i]);
+        // console.log(button, data.matchingResults[i].url);
+      }
+
+    }
   }
 }

@@ -103,7 +103,7 @@
   background-color: #ffeaa7;
   border-style: none;
   border-bottom: solid;
-  border-bottom-color: rgb(243, 191, 191);
+  border-bottom-color: white;
 }
 
 .recipe-card:active {
@@ -242,6 +242,9 @@
   margin-bottom: 10px;
   padding-left: 8px;
   letter-spacing: 1.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #go-to-site {
@@ -276,6 +279,22 @@
 
 #x-button-right {
   display: none;
+}
+
+.favorites {
+  color: white;
+  font-family: Roboto, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding-left: 8px;
+  cursor: pointer;
+}
+
+#heart {
+  color: white;
+  font-size: 17px;
+  margin-left: 20px;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) and (max-width: 911px) {
@@ -349,6 +368,7 @@
     color: white;
     float: right;
     cursor: pointer;
+    margin-right: -10px;
   }
 
   .recipe-details {
