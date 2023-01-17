@@ -281,20 +281,30 @@
   display: none;
 }
 
-.favorites {
+/* .favorites {
   color: white;
   font-family: Roboto, sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
   padding-left: 8px;
   cursor: pointer;
+} */
+
+.fa-regular,
+.fa-heart,
+.heart {
+  color: white;
+  font-size: 0.8rem;
+  margin-left: 10px;
+  cursor: pointer;
+  letter-spacing: 1.5px;
 }
 
-#heart {
-  color: white;
-  font-size: 17px;
-  margin-left: 20px;
-  cursor: pointer;
+.heart-red {
+  color: red;
+  font-size: 0.8rem;
+  margin-left: 10px;
+  letter-spacing: 1.5px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 911px) {
