@@ -59,7 +59,6 @@ function renderResult(result) {
   recipePic.setAttribute('id', 'pic-link');
   recipePic.setAttribute('resultId', data.resultId);
   resultColumn.appendChild(recipePic);
-  document.querySelectorAll('#card-link');
   recipePic.addEventListener('click', modalPopUp);
 
   var recipeName = document.createElement('h3');
@@ -68,7 +67,6 @@ function renderResult(result) {
   recipeName.setAttribute('resultId', data.resultId);
   recipeName.textContent = result.label;
   resultColumn.appendChild(recipeName);
-  document.querySelectorAll('#name-link');
   recipeName.addEventListener('click', modalPopUp);
 
   var cardLink = document.createElement('a');
@@ -76,7 +74,6 @@ function renderResult(result) {
   cardLink.setAttribute('resultId', data.resultId);
   recipeName.append(cardLink);
   data.resultId++;
-  document.querySelectorAll('#card-link');
   cardLink.addEventListener('click', modalPopUp);
 
   var source = document.createElement('h5');
@@ -222,26 +219,29 @@ function renderModal(result) {
   button.textContent = 'VISIT RECIPE PAGE';
   modalDetails.appendChild(button);
 
-  // <i class="fa-regular fa-heart" id="heart"></i>
-  // <a class="favorites">ADD TO FAVORITES</a>
-
-  var heart = document.createElement('i');
-  heart.setAttribute('id', 'heart');
+  var heart = document.createElement('span');
+  heart.classList.add('heart');
   heart.classList.add('fa-solid');
   heart.classList.add('fa-heart');
-  // heart.setAttribute('resultId', data.resultId);
+  heart.textContent = '   ADD TO FAVORITES';
+  for (var i = 0; i < data.matchingResults.length; i++) {
+    if (data.matchingResults[i].url === button.getAttribute('href')) {
+      heart.setAttribute('resultId', data.matchingResults[i].resultId);
+    }
+  }
   modalDetails.appendChild(heart);
-
-  // document.querySelectorAll('#heart');
   heart.addEventListener('click', addToFavorites);
 
-  var favorites = document.createElement('a');
-  favorites.classList.add('favorites');
-  // favorites.setAttribute('resultId', data.resultId);
-  favorites.textContent = 'ADD TO FAVORITES';
-  modalDetails.appendChild(favorites);
-  // document.querySelectorAll('.favorites');
-  favorites.addEventListener('click', addToFavorites);
+  // var favorites = document.createElement('a');
+  // favorites.classList.add('favorites');
+  // favorites.textContent = 'ADD TO FAVORITES';
+  // modalDetails.appendChild(favorites);
+  // for (i = 0; i < data.matchingResults.length; i++) {
+  //   if (data.matchingResults[i].url === button.getAttribute('href')) {
+  //     favorites.setAttribute('resultId', data.matchingResults[i].resultId);
+  //   }
+  // }
+  // favorites.addEventListener('click', addToFavorites);
 
   return modalDiv;
 }
@@ -260,11 +260,6 @@ function modalPopUp(event) {
   }
 }
 
-// DOM tree results need a result ID CHECK
-// matching result array results need a result ID CHECK
-// function datastore needs to store results in the matching result array CHECK
-// matching result array needs to clear out after a new search CHECK
-
 function modalClose(event) {
   if (event.target.matches('#x-button-left') === true || (event.target.matches('#x-button-right') === true)) {
     showModal.className = 'hidden';
@@ -273,16 +268,17 @@ function modalClose(event) {
 }
 
 function addToFavorites(event) {
-
-  if (event.target.matches('#heart') === true || event.target.matches('.favorites') === true) {
+  if (event.target.matches('.heart') === true) {
     for (var i = 0; i < data.matchingResults.length; i++) {
-      var button = document.querySelector('#go-to-site');
-      if (data.matchingResults[i].url === button.getAttribute('href')) {
 
+      if (data.matchingResults[i].resultId === Number(event.target.getAttribute('resultId'))) {
+        data.matchingResults[i].favoritesId = data.favorites.length + 1;
         data.favorites.push(data.matchingResults[i]);
-        // console.log(button, data.matchingResults[i].url);
-      }
 
+        event.target.classList.remove('heart');
+        event.target.classList.add('heart-red');
+        event.target.textContent = '   ADDED TO FAVORITES';
+      }
     }
   }
 }
