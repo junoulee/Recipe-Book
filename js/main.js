@@ -1,9 +1,15 @@
 var matchingResults = document.querySelector('.matching-results');
+var favoritedCards = document.querySelector('.favorited-cards');
 var searchKeyword = document.querySelector('#site-search');
 var searchButton = document.querySelector('#search-button');
 var numberOfHits = document.querySelector('.results-text');
+var numberofFaves = document.querySelector('.favorites-text');
 var showModal = document.querySelector('.hidden');
 var overlay = document.querySelector('.overlay-hidden');
+var homeButton = document.querySelector('#home-button');
+var favoritesButton = document.querySelector('.favorites-link');
+var $search = document.querySelector('.search-view');
+var $favorites = document.querySelector('#favorites-hidden');
 
 function getResults() {
   var searchValue = searchKeyword.value;
@@ -56,21 +62,21 @@ function renderResult(result) {
   var recipePic = document.createElement('img');
   recipePic.classList.add('result-image');
   recipePic.setAttribute('src', result.image);
-  recipePic.setAttribute('id', 'pic-link');
+  recipePic.classList.add('pic-link');
   recipePic.setAttribute('resultId', data.resultId);
   resultColumn.appendChild(recipePic);
   recipePic.addEventListener('click', modalPopUp);
 
   var recipeName = document.createElement('h3');
   recipeName.classList.add('recipe-name');
-  recipeName.setAttribute('id', 'name-link');
+  recipeName.classList.add('name-link');
   recipeName.setAttribute('resultId', data.resultId);
   recipeName.textContent = result.label;
   resultColumn.appendChild(recipeName);
   recipeName.addEventListener('click', modalPopUp);
 
   var cardLink = document.createElement('a');
-  cardLink.setAttribute('id', 'card-link');
+  cardLink.classList.add('card-link');
   cardLink.setAttribute('resultId', data.resultId);
   recipeName.append(cardLink);
   data.resultId++;
@@ -224,6 +230,11 @@ function renderModal(result) {
   heart.classList.add('fa-solid');
   heart.classList.add('fa-heart');
   heart.textContent = '   ADD TO FAVORITES';
+  if (data.view === 'favorites-view') {
+    heart.textContent = ' ADDED TO FAVORITES';
+    heart.classList.remove('heart');
+    heart.classList.add('heart-red');
+  }
   for (var i = 0; i < data.matchingResults.length; i++) {
     if (data.matchingResults[i].url === button.getAttribute('href')) {
       heart.setAttribute('resultId', data.matchingResults[i].resultId);
@@ -231,6 +242,9 @@ function renderModal(result) {
   }
   modalDetails.appendChild(heart);
   heart.addEventListener('click', addToFavorites);
+  heart.addEventListener('click', function () {
+    faveLoop(data.favorites);
+  });
 
   // var favorites = document.createElement('a');
   // favorites.classList.add('favorites');
@@ -247,7 +261,7 @@ function renderModal(result) {
 }
 
 function modalPopUp(event) {
-  if (event.target.matches('#card-link') === true || event.target.matches('#pic-link') === true || event.target.matches('#name-link') === true) {
+  if (event.target.matches('.card-link') === true || event.target.matches('.pic-link') === true || event.target.matches('.name-link') === true) {
     for (var i = 0; i < data.matchingResults.length; i++) {
       var targetId = Number(event.target.getAttribute('resultid'));
       if (targetId === data.matchingResults[i].resultId) {
@@ -278,6 +292,133 @@ function addToFavorites(event) {
         event.target.classList.remove('heart');
         event.target.classList.add('heart-red');
         event.target.textContent = '   ADDED TO FAVORITES';
+      }
+    }
+  }
+}
+
+function viewSwap(view) {
+
+  if ($search.getAttribute('data-view') === view) {
+    $favorites.className = 'hidden';
+    $search.className = 'search-view';
+    data.view = 'search-view';
+
+  } else if ($favorites.getAttribute('data-view') === view) {
+    $search.className = 'hidden';
+    $favorites.className = 'favorites-view';
+    data.view = 'favorites-view';
+
+    // faveLoop(data.favorites);
+    numberofFaves.textContent = data.favorites.length + ' favorited recipes';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  faveLoop(data.favorites);
+});
+
+homeButton.addEventListener('click', function () {
+  viewSwap('search-view');
+});
+favoritesButton.addEventListener('click', function () {
+  viewSwap('favorites-view');
+});
+
+function renderFaves(result) {
+
+  var bullets = document.createElement('li');
+  bullets.classList.add('recipe-card');
+
+  var resultColumn = document.createElement('div');
+  resultColumn.classList.add('column-third');
+  bullets.appendChild(resultColumn);
+
+  var recipePic = document.createElement('img');
+  recipePic.classList.add('result-image');
+  recipePic.setAttribute('src', result.image);
+  recipePic.setAttribute('id', 'pic-link');
+  recipePic.classList.add('pic-link');
+  recipePic.setAttribute('resultId', data.resultId);
+  recipePic.setAttribute('favoritesId', result.favoritesId);
+  resultColumn.appendChild(recipePic);
+  recipePic.addEventListener('click', favoritePopUp);
+
+  var recipeName = document.createElement('h3');
+  recipeName.classList.add('recipe-name');
+  recipeName.setAttribute('id', 'name-link');
+  recipeName.classList.add('name-link');
+  recipeName.setAttribute('resultId', data.resultId);
+  recipeName.setAttribute('favoritesId', result.favoritesId);
+  recipeName.textContent = result.name;
+  resultColumn.appendChild(recipeName);
+  recipeName.addEventListener('click', favoritePopUp);
+
+  var cardLink = document.createElement('a');
+  cardLink.setAttribute('id', 'card-link');
+  cardLink.classList.add('card-link');
+  cardLink.setAttribute('resultId', data.resultId);
+  cardLink.setAttribute('favoritesId', result.favoritesId);
+  recipeName.append(cardLink);
+  data.resultId++;
+  cardLink.addEventListener('click', favoritePopUp);
+
+  // <span class="fa-regular fa-heart heart-red"></span>
+  var source = document.createElement('h5');
+  source.classList.add('source-text');
+  source.textContent = 'Source: ' + result.source;
+  resultColumn.appendChild(source);
+  var heart = document.createElement('i');
+  heart.classList.add('fa-solid');
+  heart.classList.add('fa-heart');
+  heart.setAttribute('id', 'fave-heart');
+  source.appendChild(heart);
+
+  var bottomRow = document.createElement('div');
+  bottomRow.classList.add('row-bottom');
+
+  var leftColumn = document.createElement('div');
+  leftColumn.classList.add('column-half');
+
+  var leftDetails = document.createElement('h5');
+  leftDetails.classList.add('calories-servings-left');
+  leftDetails.textContent = Math.trunc(result.calories) + ' Calories ';
+  leftColumn.appendChild(leftDetails);
+
+  var rightColumn = document.createElement('div');
+  rightColumn.classList.add('column-half');
+
+  var rightDetails = document.createElement('h5');
+  rightDetails.classList.add('calories-servings-right');
+  rightDetails.textContent = result.serving + ' Servings';
+  rightColumn.appendChild(rightDetails);
+
+  bottomRow.appendChild(leftColumn);
+  bottomRow.appendChild(rightColumn);
+  resultColumn.appendChild(bottomRow);
+
+  return bullets;
+}
+
+function faveLoop() {
+
+  for (var i = 0; i < data.favorites.length; i++) {
+    var domTree = renderFaves(data.favorites[i]);
+    favoritedCards.appendChild(domTree);
+
+  }
+}
+
+function favoritePopUp(event) {
+  if (event.target.matches('.card-link') === true || event.target.matches('.pic-link') === true || event.target.matches('.name-link') === true) {
+    for (var i = 0; i < data.favorites.length; i++) {
+      var targetId = Number(event.target.getAttribute('favoritesid'));
+      if (targetId === data.favorites[i].favoritesId) {
+        var modalDom = renderModal(data.favorites[i]);
+        showModal.appendChild(modalDom);
+        showModal.className = 'modal';
+        overlay.className = 'overlay';
+
       }
     }
   }

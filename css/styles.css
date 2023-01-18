@@ -22,22 +22,36 @@
   font-weight: 200;
 }
 
-.image {
+.image,
+.favorites-image {
   display: flex;
   justify-content: center;
   width: auto;
 }
 
-.main-image {
+.main-image,
+.fave-image {
   width: 1536px;
   height: 500px;
 }
 
-.image-text {
+.image-text,
+.favorites-image-text {
   position: relative;
 }
 
 .find-recipe {
+  position: absolute;
+  font-family: "Rock Salt", cursive;
+  font-size: 4rem;
+  left: 500px;
+  top: 50px;
+  color: white;
+  font-weight: 100;
+  text-shadow: 2px 2px 5px #3c3a3a, 0 0 1em blue, 0 0 1em black;
+}
+
+.favorite-recipes {
   position: absolute;
   font-family: "Rock Salt", cursive;
   font-size: 4rem;
@@ -88,7 +102,7 @@
   border-bottom: none;
   display: flex;
   justify-content: center;
-  background-color: #fef8f8;
+  background-color: #f1f2f6;
   flex-wrap: wrap;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -110,7 +124,7 @@
   box-shadow: 2px 2px 5px #fc894d;
 }
 
-#card-link {
+.card-link {
   display: block;
   cursor: pointer;
   width: 400px;
@@ -138,7 +152,7 @@
   margin-right: -5px;
   border-radius: 0 8px;
   border-right: solid;
-  border-color: #fef8f8;
+  border-color: #f1f2f6;
 }
 
 .calories-servings-right {
@@ -154,7 +168,7 @@
   margin-left: -5px;
   border-radius: 0 0 8px;
   border-left: solid;
-  border-color: #fef8f8;
+  border-color: #f1f2f6;
 }
 
 .row-bottom {
@@ -182,7 +196,8 @@
   cursor: pointer;
 }
 
-.results-text {
+.results-text,
+.favorites-text {
   font-family: "Rock Salt", cursive;
   text-shadow: 2px 2px 5px #8a8787;
 }
@@ -307,6 +322,12 @@
   letter-spacing: 1.5px;
 }
 
+#fave-heart {
+  color: red;
+  font-size: 1rem;
+  float: right;
+}
+
 @media screen and (min-width: 768px) and (max-width: 911px) {
   .modal-image {
     width: 345px !important;
@@ -334,7 +355,8 @@
     width: 350px;
   }
 
-  .matching-results {
+  .matching-results,
+  .favorited-cards {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -400,13 +422,18 @@
     margin-left: -20px;
   }
 
-  #card-link {
+  .card-link {
     width: 350px;
+  }
+
+  #fave-heart {
+    float: right;
   }
 }
 
 @media screen and (min-width: 954px) {
-  .matching-results {
+  .matching-results,
+  .favorited-cards {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;

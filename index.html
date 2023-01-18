@@ -29,7 +29,7 @@
   </header>
   <main class="container">
     <div class="search-view" data-view="search-view">
-
+      <!-- search-view above -->
       <div class="row">
 
         <div class="column-full">
@@ -102,10 +102,13 @@
           </ul>
         </div>
 
-        <div class="row">
-          <div class="overlay-hidden"></div>
-          <div class="hidden">
-            <!-- <div class="modal-div" id="modal-div">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="overlay-hidden"></div>
+      <div class="hidden" id="modal-hidden">
+        <!-- <div class="modal-div" id="modal-div">
               <div class="column-half">
 
                 <i class="fa-solid fa-x" id="x-button-left"></i>
@@ -127,7 +130,7 @@
 
                   <a href="#" id="go-to-site">VISIT RECIPE PAGE</a>
                   <span class="fa-regular fa-heart heart"></span>
-
+<i class="fa-regular fa-heart heart" id="fave-heart"></i>
 
 
                 </div>
@@ -136,16 +139,61 @@
 
 
 
-          </div>
-        </div>
-
-
-
-
       </div>
     </div>
 
 
+
+    <div class="hidden" data-view="favorites-view" id="favorites-hidden">
+
+      <div class="row">
+
+        <div class="column-full">
+          <div class="favorites-box">
+            <div class="favorites-image">
+              <div class="favorites-image-text">
+                <h1 class="favorite-recipes">Favorite Recipes</h1>
+                <img class="fave-image"
+     src="https://food.unl.edu/newsletters/images/mise-en-plase.jpg">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="favorite-cards">
+        <h5 class="favorites-text"></h5>
+
+        <div class="row">
+          <ul class="favorited-cards">
+
+            <!-- <li class="recipe-card">
+
+              <div class="column-third">
+
+                <img class="result-image" src="https://img.texasmonthly.com/2022/10/B4-Barbeque-Boba-Mabank-BBQ-Tray-1.jpg?auto=compress&crop=faces&fit=crop&fm=jpg&h=900&ixlib=php-3.3.1&q=45&w=1600">
+                <h3 class="recipe-name">Lacquered Chinese Bacon Recipe</h3>
+                <h5 class="source-text">Source: Martha Stewart</h5>
+                <div class="row-bottom">
+                  <div class="column-half">
+                    <h5 class="calories-servings-left">?? Calories</h5>
+                  </div>
+                  <div class="column-half">
+                    <h5 class="calories-servings-right">?? Calories</h5>
+                  </div>
+                </div>
+              </div>
+            </li> -->
+
+          </ul>
+        </div>
+
+
+      </div>
+
+
+    </div>
 
 
   </main>
