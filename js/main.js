@@ -3,13 +3,13 @@ var favoritedCards = document.querySelector('.favorited-cards');
 var searchKeyword = document.querySelector('#site-search');
 var searchButton = document.querySelector('#search-button');
 var numberOfHits = document.querySelector('.results-text');
-var numberofFaves = document.querySelector('.favorites-text');
 var showModal = document.querySelector('.hidden');
 var overlay = document.querySelector('.overlay-hidden');
 var homeButton = document.querySelector('#home-button');
 var favoritesButton = document.querySelector('.favorites-link');
 var $search = document.querySelector('.search-view');
 var $favorites = document.querySelector('#favorites-hidden');
+var $favoritesText = document.querySelector('.favorite-recipes');
 
 function getResults() {
   var searchValue = searchKeyword.value;
@@ -104,6 +104,9 @@ function renderResult(result) {
   var rightDetails = document.createElement('h5');
   rightDetails.classList.add('calories-servings-right');
   rightDetails.textContent = result.yield + ' Servings';
+  if (result.yield === 1) {
+    rightDetails.textContent = result.yield + ' Serving';
+  }
   rightColumn.appendChild(rightDetails);
 
   bottomRow.appendChild(leftColumn);
@@ -210,7 +213,10 @@ function renderModal(result) {
 
   var serving = document.createElement('h5');
   serving.classList.add('recipe-details');
-  serving.textContent = 'Serving: ' + result.serving;
+  serving.textContent = 'Servings: ' + result.serving;
+  if (result.yield === 1) {
+    serving.textContent = 'Serving: ' + result.serving;
+  }
   modalDetails.appendChild(serving);
 
   var source = document.createElement('h5');
@@ -242,9 +248,10 @@ function renderModal(result) {
   }
   modalDetails.appendChild(heart);
   heart.addEventListener('click', addToFavorites);
-  heart.addEventListener('click', function () {
-    faveLoop(data.favorites);
-  });
+  // heart.addEventListener('click', function () {
+  //   faveLoop(data.favorites);
+
+  // });
 
   // var favorites = document.createElement('a');
   // favorites.classList.add('favorites');
@@ -298,6 +305,7 @@ function addToFavorites(event) {
 }
 
 function viewSwap(view) {
+  var savedFaves = document.querySelectorAll('.fave-card');
 
   if ($search.getAttribute('data-view') === view) {
     $favorites.className = 'hidden';
@@ -308,15 +316,18 @@ function viewSwap(view) {
     $search.className = 'hidden';
     $favorites.className = 'favorites-view';
     data.view = 'favorites-view';
+    for (var i = 0; i < savedFaves.length; i++) {
+      savedFaves[i].remove();
+    }
 
-    // faveLoop(data.favorites);
-    numberofFaves.textContent = data.favorites.length + ' favorited recipes';
+    faveLoop(data.favorites);
+    $favoritesText.textContent = data.favorites.length + ' Favorite Recipes';
   }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  faveLoop(data.favorites);
-});
+// document.addEventListener('DOMContentLoaded', function () {
+//   faveLoop(data.favorites);
+// });
 
 homeButton.addEventListener('click', function () {
   viewSwap('search-view');
@@ -329,6 +340,8 @@ function renderFaves(result) {
 
   var bullets = document.createElement('li');
   bullets.classList.add('recipe-card');
+  bullets.classList.add('fave-card');
+  bullets.setAttribute('favoritesId', result.favoritesId);
 
   var resultColumn = document.createElement('div');
   resultColumn.classList.add('column-third');
@@ -391,6 +404,9 @@ function renderFaves(result) {
   var rightDetails = document.createElement('h5');
   rightDetails.classList.add('calories-servings-right');
   rightDetails.textContent = result.serving + ' Servings';
+  if (result.serving === 1) {
+    rightDetails.textContent = result.serving + ' Serving';
+  }
   rightColumn.appendChild(rightDetails);
 
   bottomRow.appendChild(leftColumn);

@@ -48,18 +48,18 @@
   top: 50px;
   color: white;
   font-weight: 100;
-  text-shadow: 2px 2px 5px #3c3a3a, 0 0 1em blue, 0 0 1em black;
+  text-shadow: 2px 2px 5px #3c3a3a, 0 0 1em #cb3b13fe, 0 0 1em black;
 }
 
 .favorite-recipes {
   position: absolute;
   font-family: "Rock Salt", cursive;
   font-size: 4rem;
-  left: 500px;
+  left: 460px;
   top: 50px;
   color: white;
   font-weight: 100;
-  text-shadow: 2px 2px 5px #3c3a3a, 0 0 1em blue, 0 0 1em black;
+  text-shadow: 2px 2px 5px #3c3a3a, 0 0 1em #ff0800, 0 0 1em black;
 }
 
 .search-bar {
@@ -213,6 +213,7 @@
   max-width: 450px;
   padding: 5px;
   max-height: 680px;
+  z-index: 1;
 }
 
 .modal-title {
@@ -290,6 +291,7 @@
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 1;
 }
 
 #x-button-right {
