@@ -21,10 +21,6 @@ function getResults() {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     numberOfHits.textContent = xhr.response.hits.length + ' matching results for ' + '"' + searchValue + '"';
-    // console.log(xhr.status);
-    // console.log(xhr.response);
-    // console.log(xhr.response.hits[0].recipe.calories);
-
     dataLoop(xhr.response.hits);
     dataStore(xhr.response.hits);
   });
@@ -151,7 +147,6 @@ function renderModal(result) {
   var modalImage = document.createElement('img');
   modalImage.classList.add('modal-image');
   modalImage.setAttribute('src', result.image);
-  // if this doesn't work - get it from data array
   columnHalfOne.appendChild(modalImage);
 
   var columnHalfTwo = document.createElement('div');
@@ -248,21 +243,6 @@ function renderModal(result) {
   }
   modalDetails.appendChild(heart);
   heart.addEventListener('click', addToFavorites);
-  // heart.addEventListener('click', function () {
-  //   faveLoop(data.favorites);
-
-  // });
-
-  // var favorites = document.createElement('a');
-  // favorites.classList.add('favorites');
-  // favorites.textContent = 'ADD TO FAVORITES';
-  // modalDetails.appendChild(favorites);
-  // for (i = 0; i < data.matchingResults.length; i++) {
-  //   if (data.matchingResults[i].url === button.getAttribute('href')) {
-  //     favorites.setAttribute('resultId', data.matchingResults[i].resultId);
-  //   }
-  // }
-  // favorites.addEventListener('click', addToFavorites);
 
   return modalDiv;
 }
@@ -322,12 +302,11 @@ function viewSwap(view) {
 
     faveLoop(data.favorites);
     $favoritesText.textContent = data.favorites.length + ' Favorite Recipes';
+    if (data.favorites.length === 0) {
+      $favoritesText.textContent = 'Favorite Recipes';
+    }
   }
 }
-
-// document.addEventListener('DOMContentLoaded', function () {
-//   faveLoop(data.favorites);
-// });
 
 homeButton.addEventListener('click', function () {
   viewSwap('search-view');
@@ -376,7 +355,6 @@ function renderFaves(result) {
   data.resultId++;
   cardLink.addEventListener('click', favoritePopUp);
 
-  // <span class="fa-regular fa-heart heart-red"></span>
   var source = document.createElement('h5');
   source.classList.add('source-text');
   source.textContent = 'Source: ' + result.source;
