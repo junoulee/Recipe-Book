@@ -2,10 +2,11 @@
   background-color: #ee6e73;
   color: white;
   font-family: "Swanky and Moo Moo", cursive;
-  font-size: 3.5rem;
-  margin-top: -75px;
-  height: 160px;
-  justify-content: left;
+  font-size: 2.5rem;
+  padding-top: 20px;
+  margin-top: -80px;
+  height: 130px;
+  width: 100%;
 }
 
 #home-button {
@@ -15,8 +16,8 @@
 }
 
 #favorites-button {
-  font-size: 1.5rem;
-  margin-left: 70px;
+  font-size: 1.2rem;
+  margin-left: 40px;
   text-decoration: none;
   color: white;
   font-weight: 200;
@@ -31,8 +32,8 @@
 
 .main-image,
 .fave-image {
-  width: 1536px;
-  height: 500px;
+  width: auto;
+  height: 400px;
 }
 
 .image-text,
@@ -43,8 +44,8 @@
 .find-recipe {
   position: absolute;
   font-family: "Rock Salt", cursive;
-  font-size: 4rem;
-  left: 500px;
+  font-size: 3rem;
+  left: 200px;
   top: 50px;
   color: white;
   font-weight: 100;
@@ -54,8 +55,8 @@
 .favorite-recipes {
   position: absolute;
   font-family: "Rock Salt", cursive;
-  font-size: 4rem;
-  left: 460px;
+  font-size: 2.2rem;
+  left: 310px;
   top: 50px;
   color: white;
   font-weight: 100;
@@ -64,8 +65,8 @@
 
 .search-bar {
   position: absolute;
-  left: 560px;
-  top: 250px;
+  left: 120px;
+  top: 200px;
 }
 
 #site-search {
@@ -341,9 +342,15 @@
     width: 450px;
   }
 
+  .main-image,
+  .fave-image {
+    width: 100%;
+    height: 400px;
+  }
+
   .search-bar {
     position: absolute;
-    left: 490px;
+    left: 2px;
     top: 250px;
   }
 
