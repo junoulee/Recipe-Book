@@ -305,6 +305,9 @@ function viewSwap(view) {
     if (data.favorites.length === 0) {
       $favoritesText.textContent = 'Favorite Recipes';
     }
+    if (data.favorites.length === 1) {
+      $favoritesText.textContent = data.favorites.length + ' Favorite Recipe';
+    }
   }
 }
 
