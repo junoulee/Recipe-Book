@@ -27,7 +27,6 @@
 .favorites-image {
   display: flex;
   justify-content: center;
-  width: auto;
 }
 
 .main-image,
@@ -81,7 +80,7 @@
 }
 
 #search-button {
-  height: 40px;
+  line-height: 37px;
   width: 80px;
   border-style: none;
   margin-left: 5px;
@@ -190,8 +189,7 @@
   cursor: pointer;
 }
 
-.results-text,
-.favorites-text {
+.results-text {
   font-family: "Rock Salt", cursive;
   text-shadow: 2px 2px 5px #8a8787;
 }
@@ -241,7 +239,6 @@
 .modal-details {
   font-family: "rock salt", cursive;
   color: white;
-  font-weight: 0;
   padding-left: 5px;
   padding-right: 5px;
   padding-bottom: 5px;
@@ -444,8 +441,6 @@
   }
 
   .modal-image {
-    display: flex;
-    justify-content: flex-start;
     width: 420px;
     height: 560px;
     margin-left: -10px;
