@@ -264,7 +264,7 @@
   border-radius: 5px;
   background-color: #ee6e73;
   border-color: #ee6e73;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .results {
@@ -301,7 +301,7 @@
 
 .heart-red {
   color: red;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   margin-left: 10px;
   letter-spacing: 1.5px;
 }
@@ -467,7 +467,6 @@
     margin-top: 30px;
     margin-bottom: 30px;
   }
-
 
   #go-to-site {
     margin-top: 400px;
