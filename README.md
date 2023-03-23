@@ -2,11 +2,11 @@
 
 A dynamic HTML, CSS, and JavaScript solo AJAX project which incorporates the popular Edamam API to retrieve thousands of international recipes for users to browse through.
 
-⋅⋅* Designed with the user in mind, HTML 5 creates a user-friendly layout that keeps things simple and clean.
+* Designed with the user in mind, HTML 5 creates a user-friendly layout that keeps things simple and clean.
 
-⋅⋅* Media queries in CSS 3 allow the user to access the application on a variety of devices and gives the application an aesthetically pleasing look.
+* Media queries in CSS 3 allow the user to access the application on a variety of devices and gives the application an aesthetically pleasing look.
 
-⋅⋅* Functionality of the application is achieved through JavaScript ES5, interacting efficiently with the Edamam API through XMLHTTPRequests and providing the user with the functionality for an easy-to-use experience.
+* Functionality of the application is achieved through JavaScript ES5, interacting efficiently with the Edamam API through XMLHTTPRequests and providing the user with the functionality for an easy-to-use experience.
 
 ## Features
 
