@@ -234,7 +234,7 @@ function renderModal(result) {
   heart.classList.add('fa-heart');
   heart.textContent = '   ADD TO FAVORITES';
   if (data.view === 'favorites-view') {
-    heart.textContent = ' REMOVE FROM FAVORITES';
+    heart.textContent = ' REMOVE FAVORITE';
     heart.classList.remove('heart');
     heart.classList.add('heart-red');
     for (var i = 0; i < data.favorites.length; i++) {
