@@ -161,6 +161,8 @@ function renderModal(result) {
 
   xButton.addEventListener('click', modalClose);
   xButtonRight.addEventListener('click', modalClose);
+  xButton.addEventListener('click', faveModalClose);
+  xButtonRight.addEventListener('click', faveModalClose);
 
   var modalDetails = document.createElement('div');
   modalDetails.classList.add('modal-details');
@@ -235,15 +237,21 @@ function renderModal(result) {
     heart.textContent = ' ADDED TO FAVORITES';
     heart.classList.remove('heart');
     heart.classList.add('heart-red');
+    for (var i = 0; i < data.favorites.length; i++) {
+      if (data.favorites[i].url === button.getAttribute('href')) {
+        heart.setAttribute('resultId', data.favorites[i].resultId);
+        heart.setAttribute('favoritesId', data.favorites[i].favoritesId);
+      }
+    }
   }
-  for (var i = 0; i < data.matchingResults.length; i++) {
+  for (i = 0; i < data.matchingResults.length; i++) {
     if (data.matchingResults[i].url === button.getAttribute('href')) {
       heart.setAttribute('resultId', data.matchingResults[i].resultId);
     }
   }
   modalDetails.appendChild(heart);
   heart.addEventListener('click', addToFavorites);
-
+  heart.addEventListener('click', removeFavorites);
   return modalDiv;
 }
 
@@ -268,17 +276,47 @@ function modalClose(event) {
   }
 }
 
+function faveModalClose(event) {
+  if (event.target.matches('#x-button-left') === true || (event.target.matches('#x-button-right') === true)) {
+    showModal.className = 'hidden';
+    overlay.className = 'overlay-hidden';
+    var savedFaves = document.querySelectorAll('.fave-card');
+    for (var i = 0; i < savedFaves.length; i++) {
+      savedFaves[i].remove();
+    }
+    faveLoop(data.favorites);
+    $favoritesText.textContent = data.favorites.length + ' Favorite Recipes';
+    if (data.favorites.length === 0) {
+      $favoritesText.textContent = 'Favorite Recipes';
+    }
+    if (data.favorites.length === 1) {
+      $favoritesText.textContent = data.favorites.length + ' Favorite Recipe';
+    }
+  }
+}
+
 function addToFavorites(event) {
   if (event.target.matches('.heart') === true) {
     for (var i = 0; i < data.matchingResults.length; i++) {
-
       if (data.matchingResults[i].resultId === Number(event.target.getAttribute('resultId'))) {
         data.matchingResults[i].favoritesId = data.favorites.length + 1;
         data.favorites.push(data.matchingResults[i]);
-
         event.target.classList.remove('heart');
         event.target.classList.add('heart-red');
         event.target.textContent = '   ADDED TO FAVORITES';
+      }
+    }
+  }
+}
+
+function removeFavorites(event) {
+  if (event.target.className === 'fa-solid fa-heart heart-red') {
+    for (var i = 0; i < data.favorites.length; i++) {
+      if (Number(event.target.getAttribute('favoritesId')) === Number(data.favorites[i].favoritesId)) {
+        event.target.classList.remove('heart-red');
+        event.target.classList.add('heart');
+        event.target.textContent = '   ADD TO FAVORITES';
+        data.favorites.splice(i, 1);
       }
     }
   }
@@ -398,11 +436,9 @@ function renderFaves(result) {
 }
 
 function faveLoop() {
-
   for (var i = 0; i < data.favorites.length; i++) {
     var domTree = renderFaves(data.favorites[i]);
     favoritedCards.appendChild(domTree);
-
   }
 }
 
@@ -415,7 +451,6 @@ function favoritePopUp(event) {
         showModal.appendChild(modalDom);
         showModal.className = 'modal';
         overlay.className = 'overlay';
-
       }
     }
   }
