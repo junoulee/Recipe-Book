@@ -234,7 +234,7 @@ function renderModal(result) {
   heart.classList.add('fa-heart');
   heart.textContent = '   ADD TO FAVORITES';
   if (data.view === 'favorites-view') {
-    heart.textContent = ' ADDED TO FAVORITES';
+    heart.textContent = ' REMOVE FROM FAVORITES';
     heart.classList.remove('heart');
     heart.classList.add('heart-red');
     for (var i = 0; i < data.favorites.length; i++) {
@@ -313,9 +313,7 @@ function removeFavorites(event) {
   if (event.target.className === 'fa-solid fa-heart heart-red') {
     for (var i = 0; i < data.favorites.length; i++) {
       if (Number(event.target.getAttribute('favoritesId')) === Number(data.favorites[i].favoritesId)) {
-        event.target.classList.remove('heart-red');
-        event.target.classList.add('heart');
-        event.target.textContent = '   ADD TO FAVORITES';
+        event.target.className = 'hidden';
         data.favorites.splice(i, 1);
       }
     }
