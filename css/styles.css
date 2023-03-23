@@ -313,6 +313,12 @@
   padding-right: 20px;
 }
 
+@media only screen and (max-width: 600px) {
+  #search-button {
+    width: 100%;
+  }
+}
+
 @media screen and (min-width: 375px) and (max-width: 599px) {
   .main-image,
   .fave-image {
