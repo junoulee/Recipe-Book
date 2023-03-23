@@ -333,6 +333,7 @@
 
   .search-bar {
     left: 10px;
+    overflow: visible;
   }
 
   #search-button {
