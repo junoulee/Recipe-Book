@@ -16,6 +16,11 @@ function getResults() {
   if (searchValue === '') {
     return;
   }
+
+  var spinner = document.createElement('div');
+  spinner.classList.add('spinner');
+  document.body.appendChild(spinner);
+
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.edamam.com/search?q=' + searchValue + '&app_id=a1100983&app_key=e2ed55cd9fd501a90232f2085e84df8c');
   xhr.responseType = 'json';
@@ -23,6 +28,15 @@ function getResults() {
     numberOfHits.textContent = xhr.response.hits.length + ' matching results for ' + '"' + searchValue + '"';
     dataLoop(xhr.response.hits);
     dataStore(xhr.response.hits);
+    spinner.remove();
+  });
+
+  xhr.addEventListener('error', function () {
+    var error = document.createElement('div');
+    error.classList.add('error');
+    error.textContent = 'Oops! Something went wrong. Please try again later.';
+    document.body.appendChild(error);
+    spinner.remove();
   });
 
   xhr.send();
@@ -34,7 +48,6 @@ function getResults() {
       data.resultId = 1;
     }
   }
-
 }
 
 function clickResults(event) {

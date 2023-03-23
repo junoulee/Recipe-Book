@@ -313,6 +313,36 @@
   padding-right: 20px;
 }
 
+.spinner {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  border-top-color: #ee6e73;
+  animation: spin 1s ease-in-out infinite;
+}
+
+.error {
+  font-family: "Rock Salt", cursive;
+  text-shadow: 2px 2px 5px #8a8787;
+  text-align: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @media screen and (min-width: 375px) and (max-width: 599px) {
   .main-image,
   .fave-image {
