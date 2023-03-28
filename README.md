@@ -8,6 +8,10 @@ A dynamic HTML, CSS, and JavaScript solo AJAX project which incorporates the pop
 
 * Functionality of the application is achieved through JavaScript ES5, interacting efficiently with the Edamam API through XMLHTTPRequests and providing the user with the functionality for an easy-to-use experience.
 
+## Live Demo
+
+Try the application live at [https://junoulee.github.io/Recipe-Book/](https://junoulee.github.io/Recipe-Book/)
+
 ## Features
 
 - User can search for recipes with a search term.
